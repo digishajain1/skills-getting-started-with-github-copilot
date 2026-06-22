@@ -1,16 +1,69 @@
-# Getting Started with GitHub Copilot
+# NEET Reach
 
-<img src="https://octodex.github.com/images/Professortocat_v2.png" align="right" height="200px" />
+NEET Reach is an education nonprofit scheduling app for volunteers and teachers supporting 11th and 12th standard NEET coaching.
 
-Hey @digishajain1!
+Teachers can review resource priorities for Physics, Chemistry, and Biology. Volunteers can claim a 45-minute class slot and immediately receive a lesson handbook with:
+- the course structure for that session
+- homework to assign
+- a last-5-minute life skill focus to improve study habits
 
-Mona here. I'm done preparing your exercise. Hope you enjoy! 💚
+## What the app does
 
-Remember, it's self-paced so feel free to take a break! ☕️
+- Shows a weekly schedule with 3 classes every weekday
+- Shows 5 classes each day on weekends
+- Lets one volunteer claim each class slot
+- Returns the teaching handbook immediately after signup
+- Exposes teacher resource guidance for 11th and 12th standard coaching
 
-[![](https://img.shields.io/badge/Go%20to%20Exercise-%E2%86%92-1f883d?style=for-the-badge&logo=github&labelColor=197935)](https://github.com/digishajain1/skills-getting-started-with-github-copilot/issues/1)
+## Run locally
 
----
+1. Install dependencies:
 
-&copy; 2025 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
+```bash
+pip install -r requirements.txt
+```
+
+2. Start the app:
+
+```bash
+cd src
+uvicorn app:app --reload --host 0.0.0.0 --port 8000
+```
+
+3. Open the app:
+
+```text
+http://localhost:8000
+```
+
+## Free hosting to share with someone
+
+The simplest free hosted option for this app is Render, using a free web service if it is available on your account.
+
+1. Push this repository to GitHub.
+2. Sign in to Render and create a new Web Service from the repo.
+3. Use these settings:
+
+```text
+Environment: Python
+Build Command: pip install -r requirements.txt
+Start Command: cd src && uvicorn app:app --host 0.0.0.0 --port $PORT
+```
+
+4. After deploy completes, share the public URL Render gives you.
+
+If a free web service is not available on your Render account, the fallback free-sharing option is to run locally and expose it with a tunnel such as Cloudflare Tunnel or ngrok.
+
+## API endpoints
+
+- `GET /api/resources`
+- `GET /api/schedule`
+- `POST /api/schedule/{slot_id}/signup?email=...&name=...`
+- `GET /health`
+
+## Deployment notes
+
+- The repository includes a Dockerfile for container-based hosts.
+- The health check uses `/health`.
+- Static frontend files are served by FastAPI from `src/static`.
 
